@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CardItem from './Card';
 import {Row, Nav} from 'react-bootstrap';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+
+const history = createBrowserHistory();
 
 const List = () => {
 
@@ -10,14 +14,11 @@ const List = () => {
     const url = 'https://demo9165932.mockable.io/products';
     let key = 0;
 
-    
-
     useEffect(() => {
 
         const fetchData = async () => {
             const result = await axios(url);
             setProducts(result.data.products);
-            console.log(result.data.products);
         };
         fetchData();
 
@@ -46,26 +47,31 @@ const List = () => {
     return (
         <div className="container">
             <Row>
-                <Nav>
-                    <Nav.Item as="li">
-                        <Nav.Link onClick={resetCategory}>Reset</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <Nav.Link onClick={setBabyProducts}>Baby Products</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <Nav.Link onClick={setSportsOutdoors}>Sports & Outdoors</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <Nav.Link onClick={setHomeKitchen}>Home & Kitchen</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                        <Nav.Link onClick={setHealthCare}>Health & Personal Care</Nav.Link>
-                    </Nav.Item>
-                </Nav>
+                <BrowserRouter history={history}>
+                    <Nav>
+                        <Nav.Item as="li">
+                            <Link onClick={resetCategory} to="/all">Reset</Link>
+                        </Nav.Item>
+                        <Nav.Item as="li">
+                            <Link onClick={setBabyProducts} to="/babyproducts">Baby Products</Link>
+                        </Nav.Item>
+                        <Nav.Item as="li">
+                            <Nav.Link onClick={setSportsOutdoors}>Sports & Outdoors</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item as="li">
+                            <Nav.Link onClick={setHomeKitchen}>Home & Kitchen</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item as="li">
+                            <Nav.Link onClick={setHealthCare}>Health & Personal Care</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+
+                    <Route path="/all" component={List}></Route>
+                    <Route path="/babyproducts" component={List}></Route>
+
+                </BrowserRouter>
             </Row>
             <Row>
-            {/* Health & Personal Care */}
                 {
                     products.map(product => {
                         if (category === "HomeKitchen") {
