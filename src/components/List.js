@@ -3,11 +3,10 @@ import axios from 'axios';
 import Menu from './Menu';
 import AllProducts from './AllProducts';
 import BabyProducts from './BabyProducts';
-import {Row} from 'react-bootstrap';
-import {Router, Route} from 'react-router-dom';
-import {createBrowserHistory} from 'history';
-
-const history = createBrowserHistory();
+import SportsOutdoors from './SportsOutdoors';
+import HomeKitchen from './HomeKitchen';
+import HealthCare from './HealthCare';
+import {Route, Switch} from 'react-router-dom';
 
 const List = () => {
 
@@ -26,17 +25,14 @@ const List = () => {
 
     return (
         <div className="container">
-            <Row>
-                <Router history={history}>
-                    <Menu/>
-                    <Route path="/" render={()=>{
-                        return <AllProducts products={products}/>
-                    }}/>
-                    <Route path="/" render={()=>{
-                        return <BabyProducts products={products}/>
-                    }}/>
-                </Router>
-            </Row>
+            <Menu/>
+            <Switch>
+                <Route exact path="/" render={() => <AllProducts products={products}/>} />
+                <Route path="/babyproducts" render={() => <BabyProducts products={products}/>}/>
+                <Route path="/sportsoutdoors" render={() => <SportsOutdoors products={products}/>}/>
+                <Route path="/homekitchen" render={() => <HomeKitchen products={products}/>}/>
+                <Route path="/healthcare" render={() => <HealthCare products={products}/>}/>
+            </Switch>
         </div>
     )
 }

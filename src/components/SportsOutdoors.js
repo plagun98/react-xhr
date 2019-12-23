@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import CardItem from './Card';
 import {Row} from 'react-bootstrap';
 
-const BabyProducts = props => {
+const SportsOutdoors = props => {
     
 const [products, setProducts] = useState(null);
 
@@ -18,7 +18,7 @@ useEffect(() => {
         <Row>
             {
                 products && products.map(product => {
-                    if(product.bsr_category === "Baby Products") 
+                    if(product.bsr_category === "Sports & Outdoors") 
                         return <CardItem key={key++} name={product.name} brand={product.brand} price={product.price} currency={product.currency} asin={product.asin} weight={product.weight} img={product.img} link={product.link}/>
                     else return null;
                 })
@@ -27,4 +27,4 @@ useEffect(() => {
     );
 }
 
-export default BabyProducts;
+export default SportsOutdoors;
