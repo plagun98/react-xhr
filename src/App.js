@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import List from './components/List';
 import {Router} from 'react-router-dom';
@@ -9,11 +10,22 @@ const history = createBrowserHistory();
 
 const App = (props) => {
 
-console.log(props.productsStorage)
+  const [products, setProducts] = useState([]);
+  const url = 'https://demo9165932.mockable.io/products';
+
+  useEffect(() => {
+
+      const fetchData = async () => {
+          const result = await axios(url);
+          setProducts(result.data.products);
+      };
+      fetchData();
+
+  }, [url]);
 
   return (
     <Router history={history}>
-      <List/>
+      <List products={products}/>
     </Router>
   );
 }
