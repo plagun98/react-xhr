@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Menu from './Menu';
 import AllProducts from './AllProducts';
 import Category from './Category';
@@ -20,16 +20,16 @@ const List = props => {
                         <div className="input-group mb-3">
                             <input onChange={e => props.dispatch(setSearchData(e.target.value))} type="text" className="form-control" placeholder="Type here"/>
                             <div className="input-group-append">
-                                <button className="btn btn-outline-secondary" type="button">Search</button>
+                                <button  className="btn btn-outline-secondary" type="button">Search</button>
                             </div>
                         </div>
                     </div>
                     <Switch>
                         <Route exact path="/" component={AllProducts} />
-                        <Route path="/babyproducts" component={Category} />
-                        <Route path="/sportsoutdoors" component={Category} />
-                        <Route path="/homekitchen" component={Category} />
-                        <Route path="/healthcare" component={Category} />
+                        <Route path="/babyproducts" render={() => <Category category="Baby Products"/>} />
+                        <Route path="/sportsoutdoors" render={() => <Category category="Sports & Outdoors"/>} />
+                        <Route path="/homekitchen" render={() => <Category category="Home & Kitchen"/>} />
+                        <Route path="/healthcare" render={() => <Category category="Health & Personal Care"/>} />
                     </Switch>
                 </Col>
             </Row>
