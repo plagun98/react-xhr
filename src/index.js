@@ -3,40 +3,68 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import createSagaMiddleware from 'redux-saga';
+import { takeEvery, put, call } from 'redux-saga/effects';
 
 const initialState = {
-    items: [],
-    isLoading: false,
-    errors: {}
+  items: [],
+  isLoading: false,
+  errors: {}
 };
 
-export const fetchProducts = () => {
-    return (dispatch, getState) => {
-        dispatch({type: "PRODUCTS"})
-        const fetchData = async () => {
-            const result = await axios('/products.json');
-            dispatch({type: 'PRODUCTS_SUCCESS', payload: result.data.products})
-        };
-        fetchData();
-    }
+const sagaMiddleware = createSagaMiddleware();
+
+const PRODUCTS = 'PRODUCTS';
+const SUCCESS = 'PRODUCTS_SUCCESS';
+const ERROR = 'PRODUCTS_ERROR';
+
+const requestProducts = () => {
+  return { type: PRODUCTS }
+};
+
+const requestProductsSuccess = (data) => {
+  return { type: SUCCESS, payload: data }
+};
+
+const requestProductsError = () => {
+  return { type: ERROR }
+};
+
+const fetchProducts = () => {
+  return { type: 'FETCHED_PRODUCTS' }
+};
+
+function* watchFetchProducts() {
+  yield takeEvery('FETCHED_PRODUCTS', fetchProductsAsync);
+}
+
+function* fetchProductsAsync() {
+  try {
+    yield put(requestProducts());
+    const result = yield call(async () => {
+      return await axios('/products.json');
+    });
+    yield put(requestProductsSuccess(result.data.products));
+  } catch (error) {
+    yield put(requestProductsError());
+  }
 }
 
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'PRODUCTS':
+        case PRODUCTS:
           return Object.assign({}, state, {
             isLoading: true
           })
-        case 'PRODUCTS_SUCCESS':
+        case SUCCESS:
           return Object.assign({}, state, {
             isLoading: false,
             items: action.payload
           })
-        case 'PRODUCTS_ERROR':
+        case ERROR:
           return Object.assign({}, state, {
             isLoading: false,
             errors: action.errors
@@ -46,7 +74,8 @@ export const reducer = (state = initialState, action) => {
         }
 }
   
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(watchFetchProducts);
 store.dispatch(fetchProducts());
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
