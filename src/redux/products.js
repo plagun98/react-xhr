@@ -8,6 +8,8 @@ const FETCHED = 'FETCHED_PRODUCTS';
 
 export const initialState = {
     items: [],
+    search: '',
+    category: '',
     isLoading: false,
     errors: {}
 };

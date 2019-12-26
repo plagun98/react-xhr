@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const MenuWrapper = styled.ul`
     width: 100%;
-    display: flex;
     padding-top: 20px;
 `;
 const Li = styled.li`
@@ -16,7 +15,7 @@ const Menu = () => {
 
     return (
         <MenuWrapper>
-            <Li><Link to="/">Reset filters </Link></Li>
+            <Li><Link to="/">All Products</Link></Li>
             <Li><Link to="/babyproducts">Baby Products</Link></Li>
             <Li><Link to="/sportsoutdoors">Sports & Outdoors</Link></Li>
             <Li><Link to="/homekitchen">Home & Kitchen</Link></Li>
