@@ -17,7 +17,7 @@ const Menu = () => {
     
     return (
         <MenuWrapper>
-            <Li><Link to="/">All Products</Link></Li>
+            <Li><Link onClick={() => {store.dispatch(setCategory(""))}} to="/">All Products</Link></Li>
             <Li><Link onClick={() => {store.dispatch(setCategory("Baby Products"))}} to="/babyproducts">Baby Products</Link></Li>
             <Li><Link onClick={() => {store.dispatch(setCategory("Sports & Outdoors"))}} to="/sportsoutdoors">Sports & Outdoors</Link></Li>
             <Li><Link onClick={() => {store.dispatch(setCategory("Home & Kitchen"))}} to="/homekitchen">Home & Kitchen</Link></Li>

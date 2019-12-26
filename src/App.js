@@ -8,10 +8,9 @@ import { connect } from 'react-redux';
 const history = createBrowserHistory();
 
 const App = (props) => {
-
   return (
     <Router history={history}>
-      <List products={props.productsStorage.items}/>
+      <List/>
     </Router>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import CardItem from './Card';
 import {Row} from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 const AllProducts = props => {
 
@@ -9,7 +10,7 @@ const AllProducts = props => {
     return (
         <Row>
             {
-                props.products.map(product => {
+                props.allProdStorage.items.map(product => {
                     return <CardItem key={key++} name={product.name} brand={product.brand} price={product.price} currency={product.currency} asin={product.asin} weight={product.weight} img={product.img} link={product.link}/>
                 })
             }
@@ -17,4 +18,8 @@ const AllProducts = props => {
     );
 }
 
-export default AllProducts;
+export default connect(
+    state => ({
+        allProdStorage: state
+    })
+)(AllProducts);
