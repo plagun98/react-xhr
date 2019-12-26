@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import CardItem from './Card';
+import CardItem from '../Card';
 import {Row} from 'react-bootstrap';
 
 const SportsOutdoors = props => {

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import CardItem from './Card';
+import CardItem from '../Card';
 import {Row} from 'react-bootstrap';
 
-const HomeKitchen = props => {
+const HealthCare = props => {
     
 const [products, setProducts] = useState(null);
 
@@ -18,7 +18,7 @@ useEffect(() => {
         <Row>
             {
                 products && products.map(product => {
-                    if(product.bsr_category === "Home & Kitchen") 
+                    if(product.bsr_category === "Health & Personal Care") 
                         return <CardItem key={key++} name={product.name} brand={product.brand} price={product.price} currency={product.currency} asin={product.asin} weight={product.weight} img={product.img} link={product.link}/>
                     else return null;
                 })
@@ -27,4 +27,4 @@ useEffect(() => {
     );
 }
 
-export default HomeKitchen;
+export default HealthCare;

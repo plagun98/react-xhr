@@ -1,10 +1,10 @@
 import React from 'react';
 import Menu from './Menu';
-import AllProducts from './AllProducts';
-import BabyProducts from './BabyProducts';
-import SportsOutdoors from './SportsOutdoors';
-import HomeKitchen from './HomeKitchen';
-import HealthCare from './HealthCare';
+import AllProducts from './categories/AllProducts';
+import BabyProducts from './categories/BabyProducts';
+import SportsOutdoors from './categories/SportsOutdoors';
+import HomeKitchen from './categories/HomeKitchen';
+import HealthCare from './categories/HealthCare';
 import {Route, Switch} from 'react-router-dom';
 
 const List = (props) => {
