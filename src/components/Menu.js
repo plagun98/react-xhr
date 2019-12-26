@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import store from '../redux/store';
+import { setCategory } from '../redux/products';
 import styled from 'styled-components';
 
 const MenuWrapper = styled.ul`
@@ -12,14 +14,14 @@ const Li = styled.li`
 `;
 
 const Menu = () => {
-
+    
     return (
         <MenuWrapper>
             <Li><Link to="/">All Products</Link></Li>
-            <Li><Link to="/babyproducts">Baby Products</Link></Li>
-            <Li><Link to="/sportsoutdoors">Sports & Outdoors</Link></Li>
-            <Li><Link to="/homekitchen">Home & Kitchen</Link></Li>
-            <Li><Link to="/healthcare">Health & Personal Care</Link></Li>
+            <Li><Link onClick={() => {store.dispatch(setCategory("Baby Products"))}} to="/babyproducts">Baby Products</Link></Li>
+            <Li><Link onClick={() => {store.dispatch(setCategory("Sports & Outdoors"))}} to="/sportsoutdoors">Sports & Outdoors</Link></Li>
+            <Li><Link onClick={() => {store.dispatch(setCategory("Home & Kitchen"))}} to="/homekitchen">Home & Kitchen</Link></Li>
+            <Li><Link onClick={() => {store.dispatch(setCategory("Health & Personal Care"))}} to="/healthcare">Health & Personal Care</Link></Li>
         </MenuWrapper>
 
 

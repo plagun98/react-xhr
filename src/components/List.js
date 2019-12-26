@@ -4,9 +4,12 @@ import Menu from './Menu';
 import AllProducts from './AllProducts';
 import Category from './Category';
 import {Route, Switch} from 'react-router-dom';
+import { setSearchData } from '../redux/products';
+import store from '../redux/store';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-const List = (props) => {
+const List = props => {
     const Inputgroup = styled(InputGroup)`
         margin-top: 10px;
     `;
@@ -18,14 +21,12 @@ const List = (props) => {
                 </Col>
                 <Col md={10}>
                     <div className="container">
-                        <Inputgroup className="mb-3">
-                            <FormControl
-                                placeholder="Type here"
-                            />
-                            <Inputgroup.Append>
-                                <Button variant="outline-secondary">Search</Button>
-                            </Inputgroup.Append>
-                        </Inputgroup>
+                        <div className="input-group mb-3">
+                            <input onChange={e => store.dispatch(setSearchData(e.target.value))} type="text" className="form-control" placeholder="Type here"/>
+                            <div className="input-group-append">
+                                <button className="btn btn-outline-secondary" type="button">Search</button>
+                            </div>
+                        </div>
                     </div>
                     <Switch>
                         <Route exact path="/" render={() => <AllProducts products={props.products}/>} />
