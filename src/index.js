@@ -18,7 +18,7 @@ export const fetchProducts = () => {
     return (dispatch, getState) => {
         dispatch({type: "PRODUCTS"})
         const fetchData = async () => {
-            const result = await axios('https://demo9165932.mockable.io/products');
+            const result = await axios('/products.json');
             dispatch({type: 'PRODUCTS_SUCCESS', payload: result.data.products})
         };
         fetchData();
