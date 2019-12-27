@@ -11,7 +11,11 @@ const AllProducts = props => {
         <Row>
             {
                 props.allProdStorage.items.map(product => {
-                    return <CardItem key={key++} name={product.name} brand={product.brand} price={product.price} currency={product.currency} asin={product.asin} weight={product.weight} img={product.img} link={product.link}/>
+                    let str = props.allProdStorage.searchData.toLowerCase();
+                    if(~product.name.toLowerCase().indexOf(str)){
+                        return <CardItem key={key++} name={product.name} brand={product.brand} price={product.price} currency={product.currency} asin={product.asin} weight={product.weight} img={product.img} link={product.link}/>
+                    }
+                    return null;
                 })
             }
         </Row>
