@@ -7,15 +7,11 @@ const ERROR = 'PRODUCTS_ERROR';
 const FETCHED = 'FETCHED_PRODUCTS';
 const SEARCH_DATA = 'SEARCH_DATA';
 const CATEGORY = 'CATEGORY';
-const ALL_PROD_SEARCH = 'ALL_PROD_SEARCH';
-const CATEGORY_SEARCH = 'CATEGORY_SEARCH';
 
 export const initialState = {
     items: [],
     searchData: '',
     category: '',
-    allProdSearch: false,
-    categorySearch: false,
     isLoading: false,
     errors: {}
 };
@@ -60,14 +56,6 @@ export const fetchProducts = () => {
     return { type: FETCHED }
 };
 
-export const setAllProdSearch = allProdSearch => {
-    return { type: ALL_PROD_SEARCH, allProdSearch }
-}
-
-export const setCategorySearch = categorySearch => {
-    return { type: CATEGORY_SEARCH, categorySearch }
-}
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case PRODUCTS:
@@ -93,16 +81,6 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 isLoading: false,
                 category: action.chosenCategory
-            })
-        case ALL_PROD_SEARCH:
-            return Object.assign({}, state, {
-                isLoading: false,
-                allProdSearch: action.allProdSearch
-            })
-        case CATEGORY_SEARCH:
-            return Object.assign({}, state, {
-                isLoading: false,
-                categorySearch: action.categorySearch
             })
         default:
             return state
