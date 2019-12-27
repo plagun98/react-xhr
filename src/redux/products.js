@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const PRODUCTS = 'PRODUCTS';
 const SUCCESS = 'PRODUCTS_SUCCESS';
-const ERROR = 'PRODUCTS_ERROR';
 const FETCHED = 'FETCHED_PRODUCTS';
 const SEARCH_DATA = 'SEARCH_DATA';
 const CATEGORY = 'CATEGORY';
@@ -11,9 +10,7 @@ const CATEGORY = 'CATEGORY';
 export const initialState = {
     items: [],
     searchData: '',
-    category: '',
-    isLoading: false,
-    errors: {}
+    category: ''
 };
 
 export function* watchFetchProducts() {
@@ -21,15 +18,11 @@ export function* watchFetchProducts() {
 }
   
 export function* fetchProductsAsync() {
-    try {
-        yield put(requestProducts());
-        const result = yield call(async () => {
+    yield put(requestProducts());
+    const result = yield call(async () => {
         return await axios('/products.json');
-        });
-        yield put(requestProductsSuccess(result.data.products));
-    } catch (error) {
-        yield put(requestProductsError());
-    }
+    });
+    yield put(requestProductsSuccess(result.data.products));
 }
 
 const requestProducts = () => {
@@ -38,10 +31,6 @@ const requestProducts = () => {
   
 const requestProductsSuccess = (data) => {
     return { type: SUCCESS, data }
-};
-    
-const requestProductsError = () => {
-    return { type: ERROR }
 };
 
 export const setSearchData = setDataToSearch => {
@@ -66,11 +55,6 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 isLoading: false,
                 items: action.data
-            })
-        case ERROR:
-            return Object.assign({}, state, {
-                isLoading: false,
-                errors: action.errors
             })
         case SEARCH_DATA:
             return Object.assign({}, state, {

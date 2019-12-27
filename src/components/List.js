@@ -7,6 +7,7 @@ import {Route, Switch} from 'react-router-dom';
 import { setSearchData } from '../redux/products';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { withRouter } from 'react-router';
 
 const InputGroup = styled.div`
     margin-top: 20px;
@@ -33,13 +34,11 @@ const List = props => {
                         </InputGroup>
                     </div>
                     <Switch>
-                        <Route exact path="/" render={() => <AllProducts/>} />
-                        <Route path="/babyproducts" render={() => {
-                            return <Category category="Baby Products"/>
-                        }} />
-                        <Route path="/sportsoutdoors" render={() => <Category category="Sports & Outdoors"/>} />
-                        <Route path="/homekitchen" render={() => <Category category="Home & Kitchen"/>} />
-                        <Route path="/healthcare" render={() => <Category category="Health & Personal Care"/>} />
+                        <Route exact path="/" component={AllProducts} />
+                        <Route path="/babyproducts" render={props => <Category prop={props} category="Baby Products"/>} />
+                        <Route path="/sportsoutdoors" render={props => <Category prop={props} category="Sports & Outdoors"/>} />
+                        <Route path="/homekitchen" render={props => <Category prop={props} category="Home & Kitchen"/>} />
+                        <Route path="/healthcare" render={props => <Category prop={props} category="Health & Personal Care"/>} />
                     </Switch>
                 </ColStyled>
             </RowStyled>
@@ -51,4 +50,4 @@ export default connect(
     state => ({
         listStorage: state
     })
-)(List);
+)(withRouter(List));
