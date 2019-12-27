@@ -6,6 +6,11 @@ import Category from './Category';
 import {Route, Switch} from 'react-router-dom';
 import { setSearchData, setAllProdSearch, setCategorySearch } from '../redux/products';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+const InputGroup = styled.div`
+    margin-top: 20px;
+`;
 
 const List = props => {
     console.log(props)
@@ -25,7 +30,7 @@ const List = props => {
                 </Col>
                 <Col md={10}>
                     <div className="container">
-                        <div className="input-group mb-3">
+                        <InputGroup className="input-group mb-3">
                             <input onChange={e => {
                                 props.dispatch(setSearchData(e.target.value));
                                 props.dispatch(setAllProdSearch(false));
@@ -34,7 +39,7 @@ const List = props => {
                             <div className="input-group-append">
                                 <button onClick = {searchFilters} className="btn btn-outline-secondary" type="button">Search</button>
                             </div>
-                        </div>
+                        </InputGroup>
                     </div>
                     <Switch>
                         <Route exact path="/" render={() => <AllProducts/>} />
