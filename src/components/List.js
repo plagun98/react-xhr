@@ -4,18 +4,18 @@ import Menu from './Menu';
 import AllProducts from './AllProducts';
 import Category from './Category';
 import {Route, Switch} from 'react-router-dom';
-import { setSearchData } from '../redux/products';
+import { setSearchData, setAllProdSearch, setCategorySearch } from '../redux/products';
 import { connect } from 'react-redux';
 
 const List = props => {
-
-    // const searchFilters = () => {
-    //     if(props.listStorage.category === ""){
-    //         return <AllProducts search={true}/>
-    //     } else {
-    //         return <Category/>
-    //     }
-    // }
+    console.log(props)
+    const searchFilters = () => {
+        if(props.listStorage.category === ""){
+            props.dispatch(setAllProdSearch(true));
+        } else {
+            props.dispatch(setCategorySearch(true));
+        }
+    }
 
     return (
         <div>
@@ -26,9 +26,13 @@ const List = props => {
                 <Col md={10}>
                     <div className="container">
                         <div className="input-group mb-3">
-                            <input onChange={e => props.dispatch(setSearchData(e.target.value))} type="text" className="form-control" placeholder="Type here"/>
+                            <input onChange={e => {
+                                props.dispatch(setSearchData(e.target.value));
+                                props.dispatch(setAllProdSearch(false));
+                                props.dispatch(setCategorySearch(false));
+                            }} type="text" className="form-control" placeholder="Type here"/>
                             <div className="input-group-append">
-                                <button className="btn btn-outline-secondary" type="button">Search</button>
+                                <button onClick = {searchFilters} className="btn btn-outline-secondary" type="button">Search</button>
                             </div>
                         </div>
                     </div>
