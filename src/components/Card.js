@@ -1,6 +1,7 @@
 import React from 'react';
-import {Card, Col} from 'react-bootstrap';
 import styled from 'styled-components';
+
+import { Card, Col } from 'react-bootstrap';
 
 const CardI = styled(Card)`
     margin: 10px auto;
@@ -11,6 +12,7 @@ const Image = styled(Card.Img)`
 `;
 const ColStyled = styled(Col)`
     padding: 0;
+
 `;
 
 const CardItem = props => (

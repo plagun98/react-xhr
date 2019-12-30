@@ -1,10 +1,12 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import store from '../redux/store';
-import { setCategory } from '../redux/products';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import { setCategory } from '../redux/products';
+import store from '../redux/store';
+
 
 const MenuWrapper = styled.ul`
     width: 100%;
@@ -42,13 +44,38 @@ const Li = styled.li`
 `;
 
 const Menu = props => {
+
+    const sendCategoryToRedux = category => {
+        store.dispatch(setCategory(category));
+    }
+
     return (
         <MenuWrapper>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory(""))}} exact to={`/${props.location.search}`} activeClassName="active">All Products</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Baby Products"))}} to={`/babyproducts${props.location.search}`}>Baby Products</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Sports & Outdoors"))}} to={`/sportsoutdoors${props.location.search}`}>Sports & Outdoors</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Home & Kitchen"))}} to={`/homekitchen${props.location.search}`}>Home & Kitchen</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Health & Personal Care"))}} to={`/healthcare${props.location.search}`}>Health & Personal Care</LinkStyled></Li>
+            <Li>
+                <LinkStyled 
+                    onClick={sendCategoryToRedux("")} exact 
+                    to={`/${props.location.search}`} activeClassName="active">All Products</LinkStyled>
+            </Li>
+            <Li>
+                <LinkStyled 
+                    onClick={sendCategoryToRedux("Baby Products")} 
+                    to={`/babyproducts${props.location.search}`}>Baby Products</LinkStyled>
+            </Li>
+            <Li>
+                <LinkStyled 
+                    onClick={sendCategoryToRedux("Sports & Outdoors")} 
+                    to={`/sportsoutdoors${props.location.search}`}>Sports & Outdoors</LinkStyled>
+            </Li>
+            <Li>
+                <LinkStyled 
+                    onClick={sendCategoryToRedux("Home & Kitchen")} 
+                    to={`/homekitchen${props.location.search}`}>Home & Kitchen</LinkStyled>
+            </Li>
+            <Li>
+                <LinkStyled 
+                    onClick={sendCategoryToRedux("Health & Personal Care")} 
+                    to={`/healthcare${props.location.search}`}>Health & Personal Care</LinkStyled>
+            </Li>
         </MenuWrapper>
     );
 }

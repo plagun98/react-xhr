@@ -1,7 +1,9 @@
 import React from 'react';
-import CardItem from './Card';
-import {Row} from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
+
+import CardItem from './Card';
+
 
 const AllProducts = props => {
     return  (
@@ -9,8 +11,20 @@ const AllProducts = props => {
             {
                 props.allProdStorage.items.map(product => {
                     let str = props.location.search.slice(1).toLowerCase();
-                    if(~product.name.toLowerCase().indexOf(str)){
-                        return <CardItem key={product.asin} name={product.name} brand={product.brand} price={product.price} currency={product.currency} asin={product.asin} weight={product.weight} img={product.img} link={product.link}/>
+                    if(~product.name.toLowerCase().indexOf(str)) {
+                        return (
+                            <CardItem
+                                key={product.asin}
+                                name={product.name}
+                                brand={product.brand}
+                                price={product.price}
+                                currency={product.currency}
+                                asin={product.asin}
+                                weight={product.weight}
+                                img={product.img}
+                                link={product.link}
+                            />
+                        )
                     }
                     return null;
                 })

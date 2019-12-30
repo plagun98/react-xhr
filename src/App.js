@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import List from './components/List';
+import Main from './components/Main';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ const history = createBrowserHistory();
 const App = (props) => {
   return (
     <Router history={history}>
-      <List/>
+      <Main/>
     </Router>
   );
 }
