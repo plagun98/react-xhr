@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import store from '../redux/store';
 import { setCategory } from '../redux/products';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 const MenuWrapper = styled.ul`
@@ -41,16 +42,19 @@ const Li = styled.li`
 `;
 
 const Menu = props => {
-
     return (
         <MenuWrapper>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory(""))}} exact to="/" activeClassName="active">All Products</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Baby Products"))}} to={"/babyproducts"}>Baby Products</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Sports & Outdoors"))}} to="/sportsoutdoors">Sports & Outdoors</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Home & Kitchen"))}} to="/homekitchen">Home & Kitchen</LinkStyled></Li>
-            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Health & Personal Care"))}} to="/healthcare">Health & Personal Care</LinkStyled></Li>
+            <Li><LinkStyled onClick={() => {store.dispatch(setCategory(""))}} exact to={`/${props.location.search}`} activeClassName="active">All Products</LinkStyled></Li>
+            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Baby Products"))}} to={`/babyproducts${props.location.search}`}>Baby Products</LinkStyled></Li>
+            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Sports & Outdoors"))}} to={`/sportsoutdoors${props.location.search}`}>Sports & Outdoors</LinkStyled></Li>
+            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Home & Kitchen"))}} to={`/homekitchen${props.location.search}`}>Home & Kitchen</LinkStyled></Li>
+            <Li><LinkStyled onClick={() => {store.dispatch(setCategory("Health & Personal Care"))}} to={`/healthcare${props.location.search}`}>Health & Personal Care</LinkStyled></Li>
         </MenuWrapper>
     );
 }
 
-export default withRouter(Menu);
+export default connect(
+    state => ({
+        menuStorage: state
+    })
+)(withRouter(Menu));

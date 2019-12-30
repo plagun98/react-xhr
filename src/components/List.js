@@ -20,6 +20,15 @@ const RowStyled = styled(Row)`
 `;
 
 const List = props => {
+    
+    const inputHandler = e => {
+        props.dispatch(setSearchData(e.target.value));
+        props.history.push({
+            search: '?' + e.target.value
+        })
+    }
+
+    
 
     return (
         <div>
@@ -30,7 +39,7 @@ const List = props => {
                 <ColStyled md={10}>
                     <div className="container">
                         <InputGroup className="input-group mb-3">
-                            <input onChange={e => props.dispatch(setSearchData(e.target.value))} type="text" className="form-control" placeholder="Type here"/>
+                            <input onChange={inputHandler} type="text" value={props.location.search.slice(1)} className="form-control" placeholder="Type here"/>
                         </InputGroup>
                     </div>
                     <Switch>
