@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { Card, Col } from 'react-bootstrap';
 
@@ -16,6 +17,7 @@ const ColStyled = styled(Col)`
 `;
 
 const CardItem = props => (
+
     <ColStyled md='4'>
         <CardI style={{ width: '18rem' }}>
             <Image variant="top" src={props.img} />
@@ -32,5 +34,16 @@ const CardItem = props => (
         </CardI>
     </ColStyled>
 );
+
+CardItem.propTypes = {
+    name: PropTypes.string,
+    brand: PropTypes.string,
+    price: PropTypes.number,
+    currency: PropTypes.string,
+    asin: PropTypes.string,
+    weight: PropTypes.number,
+    img: PropTypes.string,
+    link: PropTypes.string
+}
 
 export default CardItem;

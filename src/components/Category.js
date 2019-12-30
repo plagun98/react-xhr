@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import CardItem from './Card';
 
@@ -22,6 +23,15 @@ const Category = props => {
         </Row>
     );
 } 
+Category.propTypes = {
+    categoryStorage: PropTypes.shape({
+        searchData: PropTypes.string,
+        category: PropTypes.string,
+        items: PropTypes.arrayOf(
+            PropTypes.object
+        )
+    })
+}
 
 export default connect(
     state => ({

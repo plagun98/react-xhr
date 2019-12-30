@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { setCategory } from '../redux/products';
 import store from '../redux/store';
@@ -44,7 +45,6 @@ const Li = styled.li`
 `;
 
 const Menu = props => {
-
     const sendCategoryToRedux = category => () => {
         store.dispatch(setCategory(category));
     }
@@ -78,6 +78,16 @@ const Menu = props => {
             </Li>
         </MenuWrapper>
     );
+}
+
+Menu.propTypes = {
+    menuStorage: PropTypes.shape({
+        searchData: PropTypes.string,
+        category: PropTypes.string,
+        items: PropTypes.arrayOf(
+            PropTypes.object
+        )
+    })
 }
 
 export default connect(

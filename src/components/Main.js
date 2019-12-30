@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { Row, Col } from 'react-bootstrap';
 import { Route, Switch } from 'react-router-dom';
@@ -24,7 +25,6 @@ const RowStyled = styled(Row)`
 `;
 
 const Main = props => {
-
     const inputHandler = e => {
         props.dispatch(setSearchData(e.target.value));
         props.history.push({
@@ -53,6 +53,16 @@ const Main = props => {
             </ColStyled>
         </RowStyled>
     );
+}
+
+Main.propTypes = {
+    mainStorage: PropTypes.shape({
+        searchData: PropTypes.string,
+        category: PropTypes.string,
+        items: PropTypes.arrayOf(
+            PropTypes.object
+        )
+    })
 }
 
 export default connect(
