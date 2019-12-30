@@ -45,7 +45,7 @@ const Li = styled.li`
 
 const Menu = props => {
 
-    const sendCategoryToRedux = category => {
+    const sendCategoryToRedux = category => () => {
         store.dispatch(setCategory(category));
     }
 
