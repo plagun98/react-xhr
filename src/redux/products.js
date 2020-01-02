@@ -18,18 +18,18 @@ export function* watchFetchProducts() {
 }
   
 export function* fetchProductsAsync() {
-    yield put(requestProducts());
+    // yield put(requestProducts());
     const result = yield call(async () => {
-        return await axios('/products.json');
+        return await (await axios('/products.json')).data.products;
     });
-    yield put(requestProductsSuccess(result.data.products));
+    yield put(requestProductsSuccess(result));
 }
 
-const requestProducts = () => {
+export const requestProducts = () => {
     return { type: PRODUCTS }
 };
   
-const requestProductsSuccess = (data) => {
+export const requestProductsSuccess = data => {
     return { type: SUCCESS, data }
 };
 
@@ -48,24 +48,22 @@ export const fetchProducts = () => {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case PRODUCTS:
-                return Object.assign({}, state, {
-                isLoading: true
-            })
+            return state;
         case SUCCESS:
-            return Object.assign({}, state, {
-                isLoading: false,
+            return {
+                ...state,
                 items: action.data
-            })
+            }
         case SEARCH_DATA:
-            return Object.assign({}, state, {
-                isLoading: false,
+            return {
+                ...state,
                 searchData: action.setDataToSearch
-            })
+            }
         case CATEGORY:
-            return Object.assign({}, state, {
-                isLoading: false,
+            return{
+                ...state,
                 category: action.chosenCategory
-            })
+            }
         default:
             return state
         }

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { setCategory } from '../redux/products';
-import store from '../redux/store';
+import { setCategory } from '../../redux/products';
+import store from '../../redux/store';
 
 
 const MenuWrapper = styled.ul`

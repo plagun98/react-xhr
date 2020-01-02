@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Main from './components/Main';
+import Main from '../Main/Main';
 
 const history = createBrowserHistory();
 
-const App = (props) => {
+const App = props => {
   return (
     <Router history={history}>
       <Main/>

@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { Route, Switch } from 'react-router-dom';
 
-import Menu from './Menu';
-import AllProducts from './AllProducts';
-import Category from './Category';
+import Menu from '../Menu/Menu';
+import AllProducts from '../AllProducts/AllProducts';
+import Category from '../Category/Category';
 
-import { setSearchData } from '../redux/products';
+import { setSearchData } from '../../redux/products';
 
 
 const InputGroup = styled.div`

@@ -3,7 +3,7 @@ import { Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import CardItem from './Card';
+import CardItem from '../Card/Card';
 
 
 const Category = props => {
